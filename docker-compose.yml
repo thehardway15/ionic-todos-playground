@@ -1,0 +1,24 @@
+version: '3'
+
+volumes:
+  npm_cache:
+  gradle:
+  node_modules:
+
+services:
+  todos:
+    image: todos
+    privileged: true
+    build:
+      context: ./
+    command:
+      ionic serve
+    volumes:
+      - npm_cache:/usr/local/share/.npm
+      - node_modules:/usr/src/app/node_modules
+      - gradle:/root/.gradle
+      - ./todos/:/usr/src/app
+    ports:
+      - "8100:8100"
+      - "35729:35729"
+      - "53703:53703"
